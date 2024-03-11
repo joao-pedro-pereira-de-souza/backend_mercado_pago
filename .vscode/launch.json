@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug TypeScript",
+      "type": "node",
+      "request": "launch",
+      "program": "${file}",
+      "args": ["PROJECT_DIR=$(dirname ${file}); ${PROJECT_DIR}"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "skipFiles": [
+         "<node_internals>/**",
+         "${workspaceFolder}**/node_modules/**",
+      ],
+      "sourceMaps": true,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+       "preLaunchTask": "tsc: build - tsconfig.json",
+        "outFiles": ["${workspaceFolder}/out/**/*.js"]
+    }
+  ]
+}
