@@ -12,7 +12,9 @@ const config = {
         '^@functions/(.*)$': '<rootDir>/src/functions/$1',
         '^@routes/(.*)$': '<rootDir>/src/routes/$1',
         '^@utils/(.*)$': '<rootDir>/src/utils/$1',
-        '^@controllers/(.*)$': '<rootDir>/src/controllers/$1'
+        '^@controllers/(.*)$': '<rootDir>/src/controllers/$1',
+        '^@interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
+        '^@libs/(.*)$': '<rootDir>/src/libs/$1',
 
     },
     clearMocks: true,
