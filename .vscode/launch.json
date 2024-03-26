@@ -1,23 +1,37 @@
 {
   "version": "0.2.0",
+  // "configurations": [
+  //   {
+  //     "name": "Debug TypeScript",
+  //     "type": "node",
+  //     "request": "launch",
+  //     "program": "${file}",
+  //     "args": ["PROJECT_DIR=$(dirname ${file}); ${PROJECT_DIR}"],
+  //     "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+  //     // "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node",
+  //     "skipFiles": [
+  //        "<node_internals>/**",
+  //        "${workspaceFolder}**/node_modules/**",
+  //     ],
+  //     "sourceMaps": true,
+  //     "cwd": "${workspaceFolder}",
+  //     "console": "integratedTerminal",
+  //     "internalConsoleOptions": "neverOpen",
+  //     "preLaunchTask": "build",
+  //     "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+  //      "runtimeExecutable": "node",
+  //     "runtimeVersion": "20.5"
+
+  //   }
+  // ]
   "configurations": [
     {
-      "name": "Debug TypeScript",
-      "type": "node",
-      "request": "launch",
-      "program": "${file}",
-      "args": ["PROJECT_DIR=$(dirname ${file}); ${PROJECT_DIR}"],
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
-      "skipFiles": [
-         "<node_internals>/**",
-         "${workspaceFolder}**/node_modules/**",
-      ],
-      "sourceMaps": true,
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-       "preLaunchTask": "tsc: build - tsconfig.json",
-        "outFiles": ["${workspaceFolder}/out/**/*.js"]
+        "type": "node",
+        "request": "launch",
+        "name": "Launch Program",
+        "program": "${workspaceFolder}/index.js",
+        "runtimeExecutable": "node",
+        "runtimeVersion": "20.5.1"
     }
-  ]
+]
 }

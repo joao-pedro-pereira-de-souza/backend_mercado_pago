@@ -1,14 +1,11 @@
 import { Server } from 'http';
 import supertest from 'supertest';
 
-
 import { describe, it, expect, jest, beforeEach } from '@jest/globals';
-
-import { app } from '@middlewares/setup';
-
 
 import { AddressInfo } from 'net';
 import listener from '@functions/listener';
+import {app} from '@middlewares/setup';
 
 
 async function OnEventListenerServer(server: Server) {
@@ -20,7 +17,6 @@ async function OnEventListenerServer(server: Server) {
 }
 
 describe('#Server', () => {
-
     beforeEach(() => {
         jest.spyOn(console, 'log').mockImplementation(() => { });
 
@@ -28,6 +24,7 @@ describe('#Server', () => {
 
     it('should connect server development', async() => {
         // arrange
+
         const PORT = 3131;
         const NODE_ENV = 'development';
 
@@ -40,10 +37,28 @@ describe('#Server', () => {
 
         await expect(OnEventListenerServer(server)).resolves.toBe(true);
         const address = server.address() as AddressInfo;
-
         expect(address.port).toBe(PORT);
 
         expect(app.listen).toHaveBeenCalledWith(String(PORT), listener);
+
+        const host = `http://localhost:${address.port}`;
+
+        const response = await fetch(host+ '/');
+
+        // assert
+        expect(response.status).toBe(200);
+
+        const body = await response.json();
+        const toBeData = {
+            version: expect.any(String),
+            name: expect.any(String),
+            engines: expect.any(Object),
+            author: expect.any(String),
+            keywords: expect.arrayContaining([expect.stringMatching(/^.*$/)])
+        };
+
+        expect(body).toEqual(toBeData);
+
     });
 
     it('should make the main request successfully', async () => {
@@ -71,4 +86,5 @@ describe('#Server', () => {
 
         expect(body).toEqual(toBeData);
     });
+
 });
