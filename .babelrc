@@ -1,0 +1,21 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "@controllers": "./src/controllers",
+        "@functions": "./src/functions",
+        "@middlewares": "./src/middlewares",
+        "@routes": "./src/routes",
+        "@utils": "./src/utils",
+        "@root": "./"
+        // Adicione outros aliases conforme necessário
+      }
+    }]
+  ]
+}

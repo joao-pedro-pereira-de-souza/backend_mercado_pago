@@ -1,7 +1,8 @@
 import 'dotenv/config';
 
 import {Server} from 'http';
-import { app } from '@middlewares/setup';
+import {app} from '@middlewares/setup';
+
 import listener from '@functions/listener';
 
 
@@ -11,5 +12,6 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 export {
-    server
+    server,
+    app
 };

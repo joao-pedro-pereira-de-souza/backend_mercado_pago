@@ -10,7 +10,9 @@ const config = {
         '^@root/(.*)$': '<rootDir>/$1',
         '^@middlewares/(.*)$': '<rootDir>/src/middlewares/$1',
         '^@functions/(.*)$': '<rootDir>/src/functions/$1',
-        '^@routes/(.*)$': '<rootDir>/src/routes/$1'
+        '^@routes/(.*)$': '<rootDir>/src/routes/$1',
+        '^@utils/(.*)$': '<rootDir>/src/utils/$1',
+        '^@controllers/(.*)$': '<rootDir>/src/controllers/$1'
 
     },
     clearMocks: true,

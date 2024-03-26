@@ -1,15 +1,8 @@
 
 import { Router } from 'express';
 
-import {version, name, engines, author,keywords} from '@root/package.json';
+import mainController from '@controllers/mainController';
 export default (app: Router) => {
-    app.get('/', (_, res) => {
-        return res.status(200).json({
-            version,
-            name,
-            engines,
-            author,
-            keywords
-        });
-    });
+    app.get('/', mainController.main);
+
 };

@@ -2,7 +2,9 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NODE_ENV: 'development' | 'production' | 'test';
-      PORT?: number;
+      PORT?: number | null;
+      RATE_LIMIT_TIME?: number | null;
+      RATE_LIMIT_LIMIT_REQUESTS?: number | null;
     }
   }
 }
