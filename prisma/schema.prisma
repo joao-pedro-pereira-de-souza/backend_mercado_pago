@@ -13,17 +13,21 @@ model Permission {
   type   String
   User   User[]
 
+  deleted_at DateTime?
+
   @@map("permissions")
 }
 
 model User {
   id            String     @id @unique @default(uuid())
   name          String
-  email         String
+  email         String     @unique
   password      String
   photo         String?
   id_permission String
   permission    Permission @relation(fields: [id_permission], references: [id])
+
+  deleted_at DateTime?
 
   @@map("users")
 }

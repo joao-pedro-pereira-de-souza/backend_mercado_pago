@@ -1,20 +1,31 @@
-import {DefaultResponseParams} from '@interfaces/response';
+import prisma from '@root/prisma/connection';
+import { DefaultResponseParams } from '@interfaces/response';
 
 
 
-export async function GetPermissionById(id: string): Promise<DefaultResponseParams> {
-    try {
+export default class {
 
-        return {
-            success: true,
-        };
-    } catch (error) {
+    public static async getPermissionByUniqueNumber(permission_number: number): Promise<DefaultResponseParams> {
+        try {
+            const permission = await prisma.permission.findUnique({ where: { number: permission_number } });
 
-        const message = 'Ocorreu um erro ao verificar a permissão do cliente';
-        return {
-            success: false,
-            error,
-            message
-        };
+            if (!permission) {
+                return {
+                    success: false,
+                    message: 'Permissão não encontrada no sistema'
+                };
+            }
+
+            return {
+                success: true,
+                data: permission
+            };
+        } catch (error) {
+            return {
+                success: false,
+                error,
+                message: 'Ocorreu um erro ao consultar a permissão do usuário'
+            };
+        }
     }
 }

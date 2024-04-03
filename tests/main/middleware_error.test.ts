@@ -3,7 +3,7 @@ import  {Response, Request, NextFunction} from 'express';
 import { describe, it, expect,  beforeEach , jest } from '@jest/globals';
 import supertest from 'supertest';
 
-import mainController from '@controllers/mainController';
+import mainController from '@controllers/main_controller';
 
 describe('#Middleware Error', () => {
 

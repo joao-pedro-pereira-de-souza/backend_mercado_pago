@@ -15,6 +15,9 @@
       "@controllers/*": ["./src/controllers/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@libs/*": ["./src/libs/*"],
+      "@schemas/*": ["./src/schemas/*"],
+      "@services/*": ["./src/services/*"],
+      "@contents/*": ["./src/contents/*"],
     },
     "resolveJsonModule": true,                        /* Enable importing .json files. */
     "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */

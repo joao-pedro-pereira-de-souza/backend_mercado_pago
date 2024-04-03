@@ -15,12 +15,14 @@ const config = {
         '^@controllers/(.*)$': '<rootDir>/src/controllers/$1',
         '^@interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
         '^@libs/(.*)$': '<rootDir>/src/libs/$1',
-
+        '^@schemas/(.*)$': '<rootDir>/src/schemas/$1',
+        '^@services/(.*)$': '<rootDir>/src/services/$1',
+        '^@contents/(.*)$': '<rootDir>/src/contents/$1',
     },
     clearMocks: true,
     preset: 'ts-jest',
     testEnvironment: 'node',
-    collectCoverage: true
+    collectCoverage: true,
 };
 
 module.exports = config;
