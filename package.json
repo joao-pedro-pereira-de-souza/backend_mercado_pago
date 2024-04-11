@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test NODE_OPTIONS='--no-deprecation --loader ts-node/esm' jest --clearCache && node --watch node_modules/.bin/jest --watchAll --injectGlobals false --runInBand --verbose tests/",
+    "test": "NODE_ENV=test NODE_OPTIONS='--no-deprecation --loader ts-node/esm' jest --clearCache && node --watch node_modules/.bin/jest --watchAll --injectGlobals false --runInBand --no-cache --verbose tests/",
     "dev": "node --watch ./node_modules/.bin/ts-node -r tsconfig-paths/register --skipIgnore src/index.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "debug": "node --watch --inspect-brk",
@@ -58,5 +58,6 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0"
-  }
+  },
+  "type": "module"
 }

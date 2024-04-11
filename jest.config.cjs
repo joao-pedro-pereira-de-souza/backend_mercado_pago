@@ -18,11 +18,14 @@ const config = {
         '^@schemas/(.*)$': '<rootDir>/src/schemas/$1',
         '^@services/(.*)$': '<rootDir>/src/services/$1',
         '^@contents/(.*)$': '<rootDir>/src/contents/$1',
+        '^@repositories/(.*)$': '<rootDir>/src/repositories/$1',
     },
     clearMocks: true,
     preset: 'ts-jest',
-    testEnvironment: 'node',
+    testEnvironment: 'jest-environment-node',
+    transform: {},
     collectCoverage: true,
+    cache: false,
 };
 
 module.exports = config;

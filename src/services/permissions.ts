@@ -1,13 +1,11 @@
-import prisma from '@root/prisma/connection';
 import { DefaultResponseParams } from '@interfaces/response';
-
-
+import permissionRepository from '@repositories/permission_repository';
 
 export default class {
 
     public static async getPermissionByUniqueNumber(permission_number: number): Promise<DefaultResponseParams> {
         try {
-            const permission = await prisma.permission.findUnique({ where: { number: permission_number } });
+            const permission = await permissionRepository.getByNumber(permission_number);
 
             if (!permission) {
                 return {
