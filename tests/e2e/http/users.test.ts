@@ -11,6 +11,7 @@ describe('#E2E /users', () => {
 
         jest.mock('@prisma/client');
     });
+
     it('should return success GET /users', async () => {
 
         const {default: userRepository} = await import('@repositories/user_repository');
@@ -213,6 +214,17 @@ describe('#E2E /users', () => {
     });
 
     it('should enter the already existing email error POST /users', async () => {
+        const { default: prisma } = await import('@root/prisma/connection');
+
+        const mockPermission = {
+            id: '1381f196-565b-4a3b-8f71-eed606e6f6eb',
+            number: 1,
+            type: 'client',
+            deleted_at: null
+        };
+
+        jest.spyOn(prisma.permission, 'findUnique').mockResolvedValue(mockPermission);
+
         const mockReturnPrisma = {
             id: '20ba5b3d-026d-4104-b3a9-8906b2243f5f',
             name: 'joao',
@@ -222,7 +234,6 @@ describe('#E2E /users', () => {
             id_permission: '1381f196-565b-4a3b-8f71-eed606e6f6eb',
             deleted_at: null
         };
-        const { default: prisma } = await import('@root/prisma/connection');
 
         jest.spyOn(prisma.user, 'findUnique').mockResolvedValue(mockReturnPrisma);
 

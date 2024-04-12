@@ -9,6 +9,8 @@ import permissions from '@contents/permissions';
 
 import userRepository from '@repositories/user_repository';
 
+import customCrypto from '@libs/crypto';
+
 async function list (req: Request, res: Response, next: NextFunction) {
     try {
         const select = { name: true, email: true, photo: true};
@@ -52,7 +54,7 @@ async function create (req: Request, res: Response, next: NextFunction) {
             name,
             email,
             photo,
-            password,
+            password: customCrypto.generate(password),
             id_permission: permission.id as string,
         };
         const user = await userRepository.create(dataCreate);

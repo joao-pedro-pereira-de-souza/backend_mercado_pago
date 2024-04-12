@@ -10,4 +10,12 @@ export const createUserSchema = zod.object({
     id_permission: zod.string().optional().nullable(),
 });
 
+
+
+export const authUserSchema = zod.object({
+    email: zod.string().email(),
+    password: zod.string().min(6),
+});
+
 export type typeCreateUserSchema = zod.infer<typeof createUserSchema>
+export type typeAuthUserSchema = zod.infer<typeof authUserSchema>

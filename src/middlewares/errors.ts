@@ -5,6 +5,7 @@ function UseCathError(app: Express) {
     app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
         if (error) {
 
+            console.error(error);
             const data = {
                 message: 'Ocorreu um erro no sistema'
             };

@@ -30,10 +30,6 @@ function Authentication(permissions?: number[]) {
             return CustomResponse.getResponse('UNAUTHORIZED', res, data);
         }
 
-        if (permissions?.length) {
-
-        }
-
 
         next();
     };
