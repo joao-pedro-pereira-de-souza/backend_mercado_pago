@@ -26,6 +26,7 @@ const config = {
     transform: {},
     collectCoverage: true,
     cache: false,
+    // silent: true
 };
 
 module.exports = config;

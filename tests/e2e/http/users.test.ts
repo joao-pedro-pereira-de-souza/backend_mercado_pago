@@ -1,5 +1,4 @@
 import { Response, Request, NextFunction } from 'express';
-
 import { describe, it, expect , jest, beforeEach } from '@jest/globals';
 import supertest from 'supertest';
 
@@ -10,6 +9,8 @@ describe('#E2E /users', () => {
         jest.resetModules();
 
         jest.mock('@prisma/client');
+
+        jest.spyOn(console, 'error').mockImplementation(()=>{});
     });
 
     it('should return success GET /users', async () => {
@@ -273,6 +274,8 @@ describe('#E2E /users', () => {
 
         jest.spyOn(prisma.permission, 'findUnique').mockResolvedValue(mockPermission);
         jest.spyOn(prisma.user, 'findUnique').mockResolvedValue(null);
+
+
         const mockCreateUserPrisma = {
             id: '20ba5b3d-026d-4104-b3a9-8906b2243f5f',
             name: 'joao',
