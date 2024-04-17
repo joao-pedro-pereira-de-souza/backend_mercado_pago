@@ -11,7 +11,7 @@ export default class {
     private static getMessageErrorVerifyToken(error_message: string): string{
         switch (error_message) {
         case 'invalid token':
-            return 'Token inválido';
+            return 'Token inválido.';
 
         case 'jwt malformed':
             return 'Token malformado.';
@@ -26,7 +26,6 @@ export default class {
     static verifyToken(token: string): DefaultResponseParams {
         try {
             const data = jwt.verify(token, String(process.env.JWT_SECURITY));
-
             return {
                 success: true,
                 data

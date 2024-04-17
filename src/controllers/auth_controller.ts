@@ -7,6 +7,7 @@ import customValidation from '@schemas/validation';
 import userRepository from '@repositories/user_repository';
 
 import customCrypto from '@libs/crypto';
+import customJwt from '@libs/jwt';
 
 async function auth (req: Request, res: Response, next: NextFunction) {
     try {
@@ -34,7 +35,16 @@ async function auth (req: Request, res: Response, next: NextFunction) {
 
         const { id, email, name, photo, deleted_at, permission } = user;
 
+        const hash = customJwt.generateToken({
+            data: {
+                id,
+                email
+            },
+            expiresIn: '7days',
+        });
+
         return res.status(200).json({
+            token: hash,
             data: {
                 id,
                 email,
