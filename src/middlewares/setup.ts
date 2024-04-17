@@ -20,8 +20,6 @@ if (node_env!== 'test') {
 Routes(app);
 UseError(app);
 
-const env = process.env;
 export {
     app,
-    env
 };
