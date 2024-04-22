@@ -31,3 +31,45 @@ model User {
 
   @@map("users")
 }
+
+model Product {
+  id          String           @id @unique @default(uuid())
+  title       String?
+  description String?
+  type        String           @unique
+  image       String?
+  value       Float?
+  payments_ml ProductDoneyPot?
+  options     ProductBee[]
+
+  id_item_mercado_pago String?
+  deleted_at           DateTime?
+
+  @@map("products")
+}
+
+model ProductDoneyPot {
+  id String @id @unique @default(uuid())
+
+  value_ml   Float
+  minimum_ml Float
+  maximum_ml Float
+  id_product String  @unique
+  product    Product @relation(fields: [id_product], references: [id])
+
+  @@map("products_honey_pot")
+}
+
+model ProductBee {
+  id          String @id @unique @default(uuid())
+  title       String
+  description String
+  image       String
+  amount      Int
+  value       Float
+
+  id_product String
+  product    Product @relation(fields: [id_product], references: [id])
+
+  @@map("products_bee")
+}

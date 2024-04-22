@@ -7,6 +7,8 @@ import { Routes } from '@routes/index';
 import RateLimit from './rate_limited';
 import UseError from './errors';
 
+import '@events/schedules';
+
 const app = express();
 
 app.use(express.json());

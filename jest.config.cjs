@@ -18,6 +18,7 @@ const config = {
         '^@schemas/(.*)$': '<rootDir>/src/schemas/$1',
         '^@services/(.*)$': '<rootDir>/src/services/$1',
         '^@contents/(.*)$': '<rootDir>/src/contents/$1',
+        '^@events/(.*)$': '<rootDir>/src/events/$1',
         '^@repositories/(.*)$': '<rootDir>/src/repositories/$1',
     },
     clearMocks: true,
@@ -26,7 +27,7 @@ const config = {
     transform: {},
     collectCoverage: true,
     cache: false,
-    silent: true
+    silent: true,
 };
 
 module.exports = config;

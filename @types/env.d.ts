@@ -12,10 +12,16 @@ declare global {
       DB_NAME: string
 
       DATABASE_URL: string
+
+      MERCADO_PAGO_INTEGRATION: string
+
+      MERCADO_PAGO_PUBLIC_SENDBOX: string
+      MERCADO_PAGO_ACCESS_TOKEN_SENDBOX: string
+
+      MERCADO_PAGO_PUBLIC_PRODUCTION: string
+      MERCADO_PAGO_ACCESS_TOKEN_PRODUCTION: string
     }
   }
 }
 
-// If this file has no import/export statements (i.e. is a script)
-// convert it into a module by adding an empty export statement.
 export {};
