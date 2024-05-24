@@ -14,10 +14,23 @@ services:
       - pgdata:/var/lib/postgresql/data
   redis:
     image: redis:latest
+    command: ["redis-server", "--requirepass", "${DB_REDIS_PASSWORD}"]
     container_name: redis-cache
     environment:
       REDIS_PASSWORD: ${DB_REDIS_PASSWORD}
     ports:
       - "${DB_REDIS_PORT}:6379"
+  jobs:
+    build: ./jobs
+    env_file: .env
+    command: "npm start"
+    working_dir: /home/node/app
+    expose:
+      - "8181"
+    ports:
+      - "8181:8181"
+    depends_on:
+      - database
+      - redis
 volumes:
   pgdata:

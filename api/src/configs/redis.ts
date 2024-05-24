@@ -1,8 +1,10 @@
+
+
 const config = {
     redis: {
-        host: '127.0.0.1',
+        host: process.env.DB_REDIS_HOST,
         port: Number(process.env.DB_REDIS_PORT),
-        // password: process.env.DB_REDIS_PASSWORD,
+        password: process.env.DB_REDIS_PASSWORD,
     },
 };
 

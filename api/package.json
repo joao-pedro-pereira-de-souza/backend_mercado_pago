@@ -8,10 +8,7 @@
     "dev": "node --watch ./node_modules/.bin/ts-node -r tsconfig-paths/register --skipIgnore src/index.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "debug": "node --watch --inspect-brk",
-    "compose:up": "docker compose up -d",
-    "compose:down": "docker-compose down --rmi all",
-    "seed": "ts-node prisma/seeds/index.ts",
-    "dev:jobs": "node --watch ./node_modules/.bin/ts-node -r tsconfig-paths/register --skipIgnore jobs/index.ts"
+    "seed": "ts-node prisma/seeds/index.ts"
   },
   "keywords": [
     "nodejs",

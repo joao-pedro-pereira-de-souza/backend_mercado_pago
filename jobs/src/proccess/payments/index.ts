@@ -1,6 +1,6 @@
 
-import connection from '../../configs/redis';
-import configs from '../../configs/bull_configs';
+import connection from '@configs/redis';
+import configs from '@configs/bull_configs';
 
 async function main(data: any) {
     console.log({ data });

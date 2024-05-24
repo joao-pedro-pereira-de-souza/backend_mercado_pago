@@ -1,5 +1,5 @@
 import 'dotenv/config';
 
-import bull from './configs/bull';
+import bull from '@configs/bull';
 
 bull.process();
