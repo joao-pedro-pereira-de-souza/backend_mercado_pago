@@ -2,7 +2,7 @@
   "compilerOptions": {
     "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
     /* Language and Environment */
-    "target": "ES5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ES2022",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "module": "commonjs",                                /* Specify what module code is generated. */
     "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     "typeRoots": ["./node_modules/@types", "./@types"],
@@ -20,6 +20,8 @@
       "@contents/*": ["./src/contents/*"],
       "@repositories/*": ["./src/repositories/*"],
       "@events/*": ["./src/events/*"],
+      "@configs/*": ["./src/configs/*"],
+      "@jobs/*": ["./src/jobs/*"],
     },
     "resolveJsonModule": true,                        /* Enable importing .json files. */
     "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */

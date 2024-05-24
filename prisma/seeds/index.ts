@@ -13,6 +13,8 @@ async function Main() {
     });
 
     if (productBee && !isProductExists) {
+
+        console.log({options: productBee.options});
         await prisma.product.create({
             data: {
                 type: productBee.type,

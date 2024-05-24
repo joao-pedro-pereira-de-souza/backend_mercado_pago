@@ -20,6 +20,8 @@ const config = {
         '^@contents/(.*)$': '<rootDir>/src/contents/$1',
         '^@events/(.*)$': '<rootDir>/src/events/$1',
         '^@repositories/(.*)$': '<rootDir>/src/repositories/$1',
+        '^@configs/(.*)$': '<rootDir>/src/configs/$1',
+        '^@jobs/(.*)$': '<rootDir>/src/jobs/$1',
     },
     clearMocks: true,
     preset: 'ts-jest',

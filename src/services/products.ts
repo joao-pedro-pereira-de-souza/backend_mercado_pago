@@ -6,13 +6,11 @@ class ProductsServices {
 
     async loadProducts() {
 
-        const productsDB = await productRepository.findManyProductsNotIntegratedMercadopago();
+        const productsDB = await productRepository.findOptionProductBee(
+            'a6cc4b84-49ad-4955-8ec9-9c2060df976e'
+        );
 
-        const productsMercadoPago = await mercadopagoLib.products.getOnePagePreferences();
-
-        if (productsDB.length && !productsMercadoPago.elements?.length ) {
-
-        }
+        return productsDB;
     }
 
 }

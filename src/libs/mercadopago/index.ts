@@ -21,25 +21,14 @@ class Main  {
         const paramsMercadoPago: MercadoPagoConfig = {
             accessToken: String(token),
             options: {
-                integratorId: process.env.MERCADO_PAGO_INTEGRATION
+                integratorId: 'dev_24c65fb163bf11ea96500242ac130004',
             }
         };
-        const client = new Mercadopago(paramsMercadoPago);
+        const client = new MercadoPagoConfig(paramsMercadoPago);
 
         this.client = client;
         this.products = new PreferenceProducts(client);
     }
-
-    // init(access_token: string) {
-
-    //     const paramsMercadoPago: MercadoPagoConfig = {
-    //         accessToken: access_token,
-    //         options: {
-    //             integratorId: process.env.MERCADO_PAGO_INTEGRATION
-    //         }
-    //     };
-    //     return new Mercadopago(paramsMercadoPago);
-    // }
 }
 
 export default new Main();
