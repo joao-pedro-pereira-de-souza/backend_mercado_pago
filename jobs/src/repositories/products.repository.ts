@@ -1,8 +1,7 @@
-import prisma from '@root/prisma/connection';
-import { typesProducts } from '@contents/products';
+import database from "../database/connection";
+import { typesProducts } from "@contents/products";
 
-
-interface QueryFindOptionProductBeeInterface {
+export interface QueryFindOptionProductBeeInterface {
   id: string;
   title: any;
   description: any;
@@ -21,11 +20,15 @@ interface QueryFindOptionProductBeeInterface {
     description: string;
   };
 }
+
 class ProductRepository {
-    async findOptionProductBee(
-        id_option: string
-    ): Promise<QueryFindOptionProductBeeInterface[]> {
-        const query = prisma.$queryRaw<QueryFindOptionProductBeeInterface[]>`
+  async findOptionProductBee(
+    id_option: string,
+    id_product: string,
+  ): Promise<QueryFindOptionProductBeeInterface[]> {
+
+     return (
+       await database.raw(`
             SELECT p.*,
             jsonb_build_object(
                 'id', sub_select.id,
@@ -42,17 +45,16 @@ class ProductRepository {
                 SELECT op.*
                 FROM products_bee AS op
                 WHERE op.id_product = p.id
+                AND op.id = '${id_option}'
                 LIMIT 1
             ) AS sub_select ON true
-            WHERE p.type = ${typesProducts.bee}
+            WHERE p.type = '${typesProducts.bee}'
             AND p.deleted_at IS NULL
-            AND sub_select.id = ${id_option}
+            AND p.id = '${id_product}'
             LIMIT 1
-        `;
-
-        return await query;
-    }
+     `)
+     ).rows as QueryFindOptionProductBeeInterface[];
+  }
 }
-
 
 export default new ProductRepository();

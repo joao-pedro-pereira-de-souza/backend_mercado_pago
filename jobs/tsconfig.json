@@ -7,6 +7,7 @@
     "typeRoots": ["./node_modules/@types", "./@types"],
     "paths": {
       "@root/*": ["./*"],
+      "@/contents/*": ["./src/contents/*"],
       "@middlewares/*": ["./src/middlewares/*"],
       "@functions/*": ["./src/functions/*"],
       "@routes/*": ["./src/routes/*"],
@@ -21,6 +22,7 @@
       "@events/*": ["./src/events/*"],
       "@configs/*": ["./src/configs/*"],
       "@jobs/*": ["./src/jobs/*"],
+      "@database/*": ["./database/*"],
     },
     "resolveJsonModule": true,
     "esModuleInterop": true,

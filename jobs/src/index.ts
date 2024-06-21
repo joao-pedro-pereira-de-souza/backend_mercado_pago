@@ -1,5 +1,5 @@
 import 'dotenv/config';
+import logger from './configs/logger';
+import setup from './setup'
 
-import bull from '@configs/bull';
-
-bull.process();
+setup.init();

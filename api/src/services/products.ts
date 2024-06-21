@@ -1,6 +1,5 @@
 import productRepository from '@repositories/product_repository';
 
-import mercadopagoLib from '@libs/mercadopago';
 
 class ProductsServices {
 

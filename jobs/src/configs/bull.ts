@@ -1,6 +1,6 @@
 import Queue from 'bull';
-
-import jobs from '../proccess';
+import jobs from '../process';
+import logger from '@configs/logger'
 
 const AllJobs = Object.values(jobs).map((queue) => {
     return new Queue(queue.name, {
@@ -9,6 +9,8 @@ const AllJobs = Object.values(jobs).map((queue) => {
     });
 });
 
+
+// console.log({AllJobs})
 export default {
     process() {
         AllJobs.forEach((queue) => {
@@ -19,23 +21,23 @@ export default {
             if (queueConfigFind) {
                 queue.process(queueConfigFind.handle);
 
-                queue.on('active', () => {
+                queue.on('active', (job) => {
                     const message = `O processo ${queueConfigFind.name} foi inicializado com sucesso ✅`;
-                    console.log(message);
+                    logger.info(message, { job });
+
                 });
 
-                queue.on('completed', () => {
+                queue.on('completed', (job) => {
                     const message = `O processo ${queueConfigFind.name} foi finalizado com sucesso ✅`;
-                    console.log(message);
+                    logger.info(message, {job});
+
                 });
 
                 queue.on('error', (job: any, err: any) => {
                     const message = `Ocorreu um erro no processo ${queueConfigFind.name} 🟥`;
-                    console.log(message, err);
-                    console.log({
-                        error: err,
-                        data: job,
-                    });
+                    logger.error({ message, data: { job, error: err } });
+
+
                 });
             }
         });
