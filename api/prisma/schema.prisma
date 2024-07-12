@@ -28,6 +28,7 @@ model User {
   permission    Permission @relation(fields: [id_permission], references: [id])
 
   deleted_at DateTime?
+  Client     Client?
 
   @@map("users")
 }
@@ -72,4 +73,13 @@ model ProductBee {
   product    Product @relation(fields: [id_product], references: [id])
 
   @@map("products_bee")
+}
+
+model Client {
+  id      String @id @unique @default(uuid())
+  cpf     String @unique
+  id_user String @unique
+  user    User   @relation(fields: [id_user], references: [id])
+
+  @@map("clients")
 }

@@ -1,5 +1,5 @@
 import Queue from 'bull';
-import jobs from '../process';
+import jobs from '../controllers';
 import logger from '@configs/logger'
 
 const AllJobs = Object.values(jobs).map((queue) => {
@@ -10,7 +10,6 @@ const AllJobs = Object.values(jobs).map((queue) => {
 });
 
 
-// console.log({AllJobs})
 export default {
     process() {
         AllJobs.forEach((queue) => {

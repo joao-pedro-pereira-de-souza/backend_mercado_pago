@@ -28,14 +28,14 @@ class ProductsServices {
     );
 
     const totalAmountAvailable = option.amount - resposeTotalOrderPending;
-
     if (totalAmountAvailable < order.amount) {
+      let message = "O seu pedido cedeu a quantidade de produto disponível.";
+      if (option.amount > order.amount) message = "Produto indisponível devido a pedidos pendentes.";
+
       const response = {
         success: false,
-        message: "O seu pedido cedeu a quantidade de produto disponível.",
-        error: new Error(
-          "O seu pedido cedeu a quantidade de produto disponível."
-        ),
+        message,
+        error: new Error(message),
       };
       return response;
     }
@@ -49,6 +49,7 @@ class ProductsServices {
     product: QueryFindOptionProductBeeInterface,
     order: ParamsOrder
   ): Promise<DefaultResponseParams> {
+
     if (!product) {
       const response = {
         success: false,

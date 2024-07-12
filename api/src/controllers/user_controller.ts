@@ -49,15 +49,16 @@ async function create (req: Request, res: Response, next: NextFunction) {
 
 
         const permission = responseGetPermission.data;
-        const {name, email, photo, password} = formatData;
+        const {name, email, photo, password, cpf} = formatData;
         const dataCreate = {
             name,
             email,
             photo,
+            cpf,
             password: customCrypto.generate(password),
             id_permission: permission.id as string,
         };
-        const user = await userRepository.create(dataCreate);
+        const user = await userRepository.createUserClient(dataCreate);
 
         return res.status(201).json({ data: user });
 

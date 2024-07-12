@@ -1,26 +1,17 @@
 
 import { DefaultResponseParams } from '@interfaces/resposes';
 import productsRepository from "@repositories/products.repository";
-import ordersRepository from "@repositories/orders.repository";
-import { ParamsPayment } from '../process/payments';
-import productsService from './products.service';
-import logger from '../configs/logger';
+import orderRepository from "@repositories/orders.repository";
+import clientRepository from "@repositories/clients.repository";
 
-// interface ParamsCreatePreferences {
-//   id: string;
-//   title: string;
-//   amount: number;
-//   value: number;
-//   description: string;
-//   image: string;
-//   client: {
-//     email: string;
-//     name: string;
-//     cpf: string;
-//   };
-//   expiration_from: string;
-//   expiration_to: string;
-// }
+import { ParamsPayment } from '../controllers/payments';
+import productsService from './products.service';
+
+import mercadopagoService from '@services/gateway/mercadopago';
+import { ParamsCreatePreferences } from '@services/gateway/mercadopago/preferences';
+
+import logger from '../configs/logger';
+import {typesProducts} from '@contents/products';
 
 async function payment(
   params: ParamsPayment
@@ -32,6 +23,7 @@ async function payment(
         amount: params.amount,
         id_product: params.id_product,
     };
+
     const responseOrderServiceValidation = await productsService.validationOrder(product, paramsOrder);
     if (!responseOrderServiceValidation.success) {
       logger.error({ data: responseOrderServiceValidation });
@@ -44,19 +36,53 @@ async function payment(
       id_option_product: params.id_option_product,
     };
 
-    const responseOrderPending = await ordersRepository.addOrderPending(
+    const responseOrderPending = await orderRepository.addOrderPending(
       detailsOrderPending,
       paramsOrder.amount
     );
-
     if (!responseOrderPending.success) {
       logger.error({ data: responseOrderPending });
       return responseOrderPending;
     }
+    const key_order_pending = responseOrderPending.data!.key;
+
+    const client = await clientRepository.findClient(params.id_client);
+    if (!client) {
+      const respose = {
+        success: false,
+        message: 'Usuário não encontrado.'
+      }
+
+      return respose;
+    }
+
+    const { expiration } = responseOrderPending.data!;
+    const value_product = product.type === typesProducts.bee ? product.option.value : product.value;
+    const paramsCreateMercadoPago: ParamsCreatePreferences = {
+      title: product.title,
+      image: product.image,
+      description: product.description,
+      id: product.id,
+      amount: params.amount,
+      value: value_product,
+      client: {
+        name: client.name,
+        cpf: client.cpf,
+        email: client.email,
+      },
+      expiration_from: expiration.start,
+      expiration_to: expiration.end,
+    };
+    const resposePreferenceMercadoPago = await mercadopagoService.preference.create(paramsCreateMercadoPago);
+
+    // await orderRepository.deleteOrderPending(key_order_pending);
 
     return {
       success: true,
-      data: product,
+      data: {
+        preference: resposePreferenceMercadoPago,
+        key_order: key_order_pending,
+      },
     };
 
   } catch (error) {

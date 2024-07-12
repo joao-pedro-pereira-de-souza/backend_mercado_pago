@@ -1,7 +1,5 @@
 import { describe, it, expect, jest, beforeEach } from "@jest/globals";
 
-
-
 describe("#configs/bull", () => {
 
    beforeEach(() => {
@@ -11,7 +9,7 @@ describe("#configs/bull", () => {
 
 
   it("the loop should pass normally even without a process created", async () => {
-    jest.mock("@root/src/process", () => ({
+    jest.mock("@root/src/controllers", () => ({
       __esModule: false,
       default: {},
     }));

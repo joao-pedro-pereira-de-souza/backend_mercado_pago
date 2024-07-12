@@ -23,6 +23,10 @@ services:
   jobs:
     build: ./jobs
     env_file: .env
+    environment:
+      - PORT=8181
+      - ADDRESS_API=https://1afd-2804-1b3-af43-cde6-7df6-5368-ef23-2aab.ngrok-free.app
+    container_name: jobs
     command: "npm start"
     working_dir: /home/node/app
     expose:

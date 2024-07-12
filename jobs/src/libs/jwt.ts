@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {DefaultResponseParams} from '@interfaces/response';
+import {DefaultResponseParams} from '@interfaces/resposes';
 
 interface GenerateTokenParams {
     expiresIn: string,

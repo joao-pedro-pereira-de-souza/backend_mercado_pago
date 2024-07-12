@@ -3,7 +3,7 @@ import { RedisClientType } from "redis";
 import logger from '@configs/logger';
 
 class RedisService {
-  client?: RedisClientType;
+  client!: RedisClientType;
   connection: string;
   constructor(connection: string) {
     this.connection = connection;
