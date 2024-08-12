@@ -1,5 +1,4 @@
 import { describe, it, expect, jest, beforeEach } from "@jest/globals";
-import { RedisClientType } from "redis";
 
 describe("#services/orders", () => {
   beforeEach(() => {

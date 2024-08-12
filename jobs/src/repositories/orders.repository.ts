@@ -60,22 +60,19 @@ class OrderRepository {
         }
       );
 
-      console.log({ responseRedis });
-
-    const options =  { timeZone: 'America/Sao_Paulo' };
-    const now = new Date().toLocaleString('pt-BR', options);
-
+      const now = new Date();
+      const end = new Date(
+        now.getTime() +
+          mercadopagoConfigs.PREFERENCE.EXPIRATION_TIME_MINUTES * 60 * 1000
+      );
       return {
         success: true,
         data: {
           redis: responseRedis,
           key: keySet,
           expiration: {
-            start: now,
-            end: new Date(now).setMinutes(
-              new Date(now).getHours() +
-                mercadopagoConfigs.PREFERENCE.EXPIRATION_TIME_MINUTES
-            ).toString(),
+            start: now.toISOString(),
+            end: end.toISOString(),
           },
         },
       };
@@ -101,7 +98,7 @@ class OrderRepository {
     }
     const results = await redisService.client?.mGet(keys);
 
-    return results || [];
+    return results;
   }
 
   async deleteOrderPending(key_order_pending: string): Promise<void> {

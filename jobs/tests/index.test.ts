@@ -5,8 +5,14 @@ describe("#index", () => {
     jest.clearAllMocks();
     jest.resetModules();
 
-       const { default: moduleLogger } = await import("@configs/logger");
-       jest.spyOn(moduleLogger, "error").mockImplementation(()=> {});
+    const { default: moduleLogger } = await import("@configs/logger");
+    jest.spyOn(moduleLogger, "error").mockImplementation(() => { });
+
+    jest.mock("@root/src/providers/serverhttp", () => {
+      return {
+        http: jest.fn(),
+      };
+    });
   });
 
   it("should start the module successfully", async () => {
@@ -146,5 +152,6 @@ describe("#index", () => {
       },
     };
     expect(logErrorMock).toHaveBeenNthCalledWith(1, loggerError.data.message, loggerError);
+
   });
 });

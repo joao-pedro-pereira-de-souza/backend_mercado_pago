@@ -9,7 +9,7 @@ class RedisService {
     this.connection = connection;
   }
 
-  async init(){
+  async init() {
     this.client = redis.createClient({
       url: this.connection,
     });
