@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Permission {
+  id     String @id @unique @default(uuid())
+  number Int    @unique
+  type   String
+  User   User[]
+
+  deleted_at DateTime?
+
+  @@map("permissions")
+}
+
+model User {
+  id            String     @id @unique @default(uuid())
+  name          String
+  email         String     @unique
+  password      String
+  photo         String?
+  id_permission String
+  permission    Permission @relation(fields: [id_permission], references: [id])
+
+  deleted_at DateTime?
+  Client     Client?
+
+  @@map("users")
+}
+
+model Product {
+  id          String           @id @unique @default(uuid())
+  title       String?
+  description String?
+  type        String           @unique
+  image       String?
+  value       Float?
+  payments_ml ProductDoneyPot?
+  options     ProductBee[]
+
+  id_item_mercado_pago String?
+  deleted_at           DateTime?
+
+  @@map("products")
+}
+
+model ProductDoneyPot {
+  id String @id @unique @default(uuid())
+
+  value_ml   Float
+  minimum_ml Float
+  maximum_ml Float
+  id_product String  @unique
+  product    Product @relation(fields: [id_product], references: [id])
+
+  @@map("products_honey_pot")
+}
+
+model ProductBee {
+  id          String @id @unique @default(uuid())
+  title       String
+  description String
+  image       String
+  amount      Int
+  value       Float
+
+  id_product String
+  product    Product @relation(fields: [id_product], references: [id])
+
+  @@map("products_bee")
+}
+
+model Client {
+  id      String @id @unique @default(uuid())
+  cpf     String @unique
+  id_user String @unique
+  user    User   @relation(fields: [id_user], references: [id])
+
+  @@map("clients")
+}
