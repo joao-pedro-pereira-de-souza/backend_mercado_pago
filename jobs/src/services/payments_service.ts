@@ -75,8 +75,6 @@ async function payment(
     };
     const resposePreferenceMercadoPago = await mercadopagoService.preference.create(paramsCreateMercadoPago);
 
-    // await orderRepository.deleteOrderPending(key_order_pending);
-
     return {
       success: true,
       data: {

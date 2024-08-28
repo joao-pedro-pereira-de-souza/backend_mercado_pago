@@ -1,6 +1,8 @@
 
 import cors from 'cors';
 import express from 'express';
+import http from 'http';
+import {Server} from 'socket.io';
 
 import { Routes } from '@routes/index';
 
@@ -20,6 +22,8 @@ if (node_env!== 'test') {
 Routes(app);
 UseError(app);
 
-export {
-    app,
-};
+const server = http.createServer(app);
+
+const io = new Server(server);
+
+export { app, server, io};
