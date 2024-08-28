@@ -45,9 +45,9 @@ export class PreferenceProducts {
 
         const product = await preference.create({
           body: {
-            // expires: true,
-            // expiration_date_from: params.expiration_from,
-            // expiration_date_to: params.expiration_to,
+            expires: true,
+            expiration_date_from: params.expiration_from,
+            expiration_date_to: params.expiration_to,
             items: [
               {
                 id: params.id,
