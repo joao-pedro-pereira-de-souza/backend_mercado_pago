@@ -1,30 +1,28 @@
 import prisma from '../connection';
-import products from './products.json';
+import {Prisma} from 'prisma/prisma-client';
+import {PermissionsSeed} from './permissions.seed';
+import {UsersSeed} from './users.seed';
+import {ProductsSeed} from './products.seed';
 
 async function Main() {
 
-    const productBee = products.find((item) => item.type === 'product_bee');
 
-    const isProductExists = await prisma.product.findFirst({
-        where: { type: 'product_bee', deleted_at: null },
-        include: {
-            options: true
-        }
-    });
+    try {
 
-    if (productBee && !isProductExists) {
+        await prisma.$transaction(
+            async (trx) => {
+                const permissionsSeed = new PermissionsSeed(trx);
+                const usersSeed = new UsersSeed(trx);
+                const productsSeed = new ProductsSeed(trx);
 
-        await prisma.product.create({
-            data: {
-                type: productBee.type,
-                options: {
-                    createMany: {
-                        data: productBee.options
-                    }
-                }
-            }
-        });
-
+                await permissionsSeed.inicialize();
+                await usersSeed.inicialize();
+                await productsSeed.inicialize();
+            },
+            { isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted }
+        );
+    } catch (error) {
+        console.log(error);
     }
 
 }
