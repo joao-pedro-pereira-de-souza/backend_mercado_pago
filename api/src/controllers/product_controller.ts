@@ -5,8 +5,17 @@ import jobs from '@jobs/index';
 import { paymentSchema, typePaymentSchema } from '@schemas/product_schema';
 import customValidation from '@schemas/validation';
 
+import ProductsRepository from '../repositories/product_repository';
 
+async function getAllGroupedByType(req: Request, res: Response, next: NextFunction) {
+    try {
 
+        const result = await ProductsRepository.findAllGroupedByType();
+        return res.status(200).json({ data: result });
+    } catch (error) {
+        next(error);
+    }
+}
 async function payment(req: Request, res: Response, next: NextFunction) {
     try {
         const responseValidation = customValidation.validation(
@@ -29,4 +38,5 @@ async function payment(req: Request, res: Response, next: NextFunction) {
 
 export default {
     payment,
+    getAllGroupedByType,
 };

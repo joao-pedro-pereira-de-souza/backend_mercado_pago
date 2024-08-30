@@ -52,6 +52,83 @@ class ProductRepository {
 
         return await query;
     }
+
+    async findAllGroupedByType() {
+
+
+
+        const responseQuery = await prisma.$queryRaw`
+         SELECT p.*,
+                ARRAY(
+                     SELECT jsonb_build_object(
+                'id', pb.id,
+                'title', pb.title,
+                'description', pb.description,
+                'image', pb.image,
+                'amount', pb.amount,
+                'value', pb.value
+            )
+            FROM products_bee AS pb
+            WHERE pb.id_product = p.id
+                ) AS options,
+            phpt.value_ml,
+            phpt.minimum_ml,
+            phpt.maximum_ml
+            FROM products AS p
+            LEFT JOIN products_honey_pot AS phpt ON phpt.id_product = p.id
+        ` as any[];
+
+        if (!responseQuery) return [];
+
+        const formatObject: any = {};
+
+        responseQuery.forEach((product) => {
+
+            switch (product.type) {
+            case typesProducts.bee:
+                formatObject[product.type] = {
+                    id: product.id,
+                    title: product.title,
+                    description: product.description,
+                    type: product.type,
+                    options: product.options,
+                };
+                break;
+
+            case typesProducts.honey_pot:
+                formatObject[product.type] = {
+                    id: product.id,
+                    title: product.title,
+                    description: product.description,
+                    type: product.type,
+                    image: product.image,
+                    value: product.value,
+                    value_ml: product.value_ml,
+                    minimum_ml: product.minimum_ml,
+                    maximum_ml: product.maximum_ml,
+                };
+                break;
+
+            case typesProducts.hive:
+                formatObject[product.type] = {
+                    id: product.id,
+                    title: product.title,
+                    description: product.description,
+                    type: product.type,
+                    image: product.image,
+                    value: product.value,
+
+                };
+                break;
+            default:
+                formatObject[product.type] = { ...product };
+                break;
+            }
+
+        });
+
+        return formatObject;
+    }
 }
 
 
