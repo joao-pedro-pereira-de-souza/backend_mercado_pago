@@ -22,6 +22,7 @@ const config = {
         '^@repositories/(.*)$': '<rootDir>/src/repositories/$1',
         '^@configs/(.*)$': '<rootDir>/src/configs/$1',
         '^@jobs/(.*)$': '<rootDir>/src/jobs/$1',
+        '^@signatures/(.*)$': '<rootDir>/src/signatures/$1',
     },
     clearMocks: true,
     preset: 'ts-jest',
@@ -29,7 +30,7 @@ const config = {
     transform: {},
     collectCoverage: true,
     cache: false,
-    silent: true,
+    silent: false,
 };
 
 module.exports = config;

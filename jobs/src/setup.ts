@@ -2,15 +2,12 @@ import "dotenv/config";
 import redisService from "@services/redis_service";
 import bull from "@configs/bull";
 import logger from "./configs/logger";
-import ProvidersHttp from '@root/src/providers/serverhttp';
 
 class Main {
   async init() {
     try {
       await redisService.init();
       bull.process();
-
-      ProvidersHttp.http();
       debugger
     } catch (error) {
       const response = {

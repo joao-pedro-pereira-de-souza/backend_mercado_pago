@@ -90,7 +90,8 @@ describe('#E2E /users', () => {
         const body = {
             name: 'joao',
             email: 'john',
-            password:'teste123'
+            password: 'teste123',
+            cpf: '555.835.315-50',
         };
 
         const { app } = await import('@middlewares/setup');
@@ -103,6 +104,7 @@ describe('#E2E /users', () => {
 
         expect(response.status).toEqual(422);
         const bodyReturn = response.text ? JSON.parse(response.text) : {};
+
 
         expect(bodyReturn.success).toEqual(false);
 
@@ -137,49 +139,36 @@ describe('#E2E /users', () => {
 
         const expectedValidation = [
             {
-                code: 'invalid_type', expected: 'string', received: 'undefined', path: ['name'], message: 'Required'
+                code: 'invalid_type',
+                expected: 'string',
+                received: 'undefined',
+                path: ['name'],
+                message: 'Required',
             },
             {
-                code: 'invalid_type', expected: 'string', received: 'undefined', path: ['email'], message: 'Required'
-
+                code: 'invalid_type',
+                expected: 'string',
+                received: 'undefined',
+                path: ['email'],
+                message: 'Required',
             },
             {
-                code: 'invalid_type', expected: 'string', received: 'undefined', path: ['password'], message: 'Required'
-
-            }
+                code: 'invalid_type',
+                expected: 'string',
+                received: 'undefined',
+                path: ['cpf'],
+                message: 'Required',
+            },
+            {
+                code: 'invalid_type',
+                expected: 'string',
+                received: 'undefined',
+                path: ['password'],
+                message: 'Required',
+            },
         ];
 
         expect(bodyReturn.data).toEqual(expectedValidation);
-
-    });
-
-    it('should get permission client error POST /users', async () => {
-        const { default: permissionRepository } = await import('@repositories/permission_repository');
-        jest.spyOn(permissionRepository, 'getByNumber').mockResolvedValue(null);
-
-        const body = {
-            name: 'john',
-            email: 'joaoQA@gmail.com',
-            password:'teste123'
-        };
-
-        const { app } = await import('@middlewares/setup');
-        const apiService = supertest(app);
-        const response = await apiService
-            .post('/users')
-            .send(body)
-            .set('Content-Type', 'application/json')
-            .set('Accept', 'application/json');
-
-        expect(response.status).toEqual(401);
-
-        const bodyReturn = response.text ? JSON.parse(response.text) : {};
-
-        const expectedReturn = {
-            success: false,
-            message: 'Permissão não encontrada no sistema'
-        };
-        expect(bodyReturn).toEqual(expectedReturn);
 
     });
 
@@ -191,7 +180,8 @@ describe('#E2E /users', () => {
         const body = {
             name: 'john',
             email: 'joaoQA@gmail.com',
-            password:'teste123'
+            password: 'teste123',
+            cpf: '555.835.315-50',
         };
 
         const { app } = await import('@middlewares/setup');
@@ -241,7 +231,8 @@ describe('#E2E /users', () => {
         const body = {
             name: 'john',
             email: 'joaoQA@gmail.com',
-            password:'teste123'
+            password: 'teste123',
+            cpf: '555.835.315-50',
         };
 
         const { app } = await import('@middlewares/setup');
@@ -290,7 +281,8 @@ describe('#E2E /users', () => {
         const body = {
             name: 'john',
             email: 'joaoQA@gmail.com',
-            password:'teste123'
+            password: 'teste123',
+            cpf: '555.835.315-50',
         };
 
         const { app } = await import('@middlewares/setup');

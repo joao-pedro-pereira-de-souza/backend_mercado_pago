@@ -66,8 +66,8 @@ export class PreferenceProducts {
               },
             },
             back_urls: {
-              success: process.env.ADDRESS_API + "/payments/success",
-              failure: process.env.ADDRESS_API + "/payments/failure",
+              success: process.env.ADDRESS_API + "/payments/webhooks/success",
+              failure: process.env.ADDRESS_API + "/payments/webhooks/failure",
             },
           },
         });

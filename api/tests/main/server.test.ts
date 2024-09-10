@@ -5,7 +5,7 @@ import { describe, it, expect, jest, beforeEach } from '@jest/globals';
 
 import { AddressInfo } from 'net';
 import listener from '@functions/listener';
-import {app} from '@middlewares/setup';
+import {app, server} from '@middlewares/setup';
 
 
 async function OnEventListenerServer(server: Server) {
@@ -31,15 +31,15 @@ describe('#Server', () => {
         process.env.NODE_ENV = NODE_ENV;
         process.env.PORT = PORT;
 
-        jest.spyOn(app, 'listen');
+        jest.spyOn(server, 'listen');
 
-        const { server }=  await import('../../src/index');
-
-        await expect(OnEventListenerServer(server)).resolves.toBe(true);
-        const address = server.address() as AddressInfo;
+        const { server: serverResult }=  await import('../../src/index');
+        await expect(OnEventListenerServer(serverResult)).resolves.toBe(true);
+        const address = serverResult.address() as AddressInfo;
         expect(address.port).toBe(PORT);
 
-        expect(app.listen).toHaveBeenCalledWith(String(PORT), listener);
+
+        expect(server.listen).toHaveBeenCalledWith(String(PORT), listener);
 
         const host = `http://localhost:${address.port}`;
 

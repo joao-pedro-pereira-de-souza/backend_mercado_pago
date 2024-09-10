@@ -1,0 +1,40 @@
+{
+  "body": {
+    "action": "payment.created",
+    "api_version": "v1",
+    "data": {
+      "id": "1319492496"
+    },
+    "date_created": "2024-09-10T01:02:45Z",
+    "id": 115719918421,
+    "live_mode": false,
+    "type": "payment",
+    "user_id": "662535518"
+  },
+  "query": {
+    "data.id": "1319492496",
+    "type": "payment"
+  },
+  "headers": {
+    "host": "5b79-2804-1b3-af42-9dbc-213-f19d-d654-c114.ngrok-free.app",
+    "user-agent": "MercadoPago WebHook v1.0 payment",
+    "content-length": "187",
+    "accept": "application/json",
+    "accept-encoding": "gzip",
+    "content-type": "application/json",
+    "referer": "https://mercadopago.com.ar",
+    "traceparent": "00-0000000000000000c838af733553b1b4-7d7bfa03a0ad23d1-00",
+    "x-b3-sampled": "0",
+    "x-b3-spanid": "7d7bfa03a0ad23d1",
+    "x-b3-traceid": "0000000000000000c838af733553b1b4",
+    "x-forwarded-for": "18.206.34.84",
+    "x-forwarded-host": "5b79-2804-1b3-af42-9dbc-213-f19d-d654-c114.ngrok-free.app",
+    "x-forwarded-proto": "https",
+    "x-request-id": "0182fdd5-a498-44e3-b410-9dd6c2ec6fe3",
+    "x-rest-pool-name": "pool_unknown",
+    "x-signature": "ts=1725918752,v1=38f702d6f7e92a3a23d47e05b538cd50958ab7afab7b4b4e143756f63dba5cba",
+    "x-socket-timeout": "25000",
+    "x-trace-digest-35": "Ag7YtEqoMZk/EAcDF1QCB4eSaZ1WlB9DsirydPE1PyYoTu4rO3lp2c/6VVF43t2okD6vkqjEImdzyuyroaI82bjpMTc1lXloMzCMtzYjzl7Ufr1OfFiTVw8Efl26fboy"
+  },
+  "url": "/payments/webhooks/success?data.id=1319492496&type=payment"
+}
