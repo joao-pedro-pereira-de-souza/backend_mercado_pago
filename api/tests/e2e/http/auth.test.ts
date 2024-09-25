@@ -158,7 +158,8 @@ describe('#E2E /auth', () => {
         const bodyReturn = response.text ? JSON.parse(response.text) : {};
 
         const expectedResponse = {
-            data: {
+            token: expect.any(String),
+            client: {
                 id: expect.any(String),
                 email: expect.any(String),
                 name: expect.any(String),
@@ -166,10 +167,10 @@ describe('#E2E /auth', () => {
                 deleted_at: null,
                 permission: {
                     type: expect.any(String),
-                }
-            }
+                },
+            },
         };
 
-        expect(bodyReturn.data).toEqual(expect.objectContaining(expectedResponse.data));
+        expect(bodyReturn).toEqual(expect.objectContaining(expectedResponse));
     });
 });

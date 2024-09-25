@@ -1,6 +1,7 @@
-import { MercadoPagoConfig, Preference } from 'mercadopago';
+import { MercadoPagoConfig, Preference  } from 'mercadopago';
 import { PreferenceSearchResponse } from 'mercadopago/dist/clients/preference/search/types';
 
+import {randomUUID} from 'crypto'
 interface ParamsItemsPreference {
   id: string;
   title: string;
@@ -19,6 +20,7 @@ export interface ParamsCreatePreferences {
   description: string;
   image: string;
   client: {
+    id_user: string;
     email: string;
     name: string;
     cpf: string;
@@ -57,6 +59,10 @@ export class PreferenceProducts {
                 description: params.description,
               },
             ],
+            payment_methods: {
+              default_installments: 1,
+              installments: 6
+            },
             payer: {
               email: client.email,
               name: client.name,
@@ -65,9 +71,18 @@ export class PreferenceProducts {
                 number: client.cpf,
               },
             },
+            external_reference: `id_user:${
+              client.id_user
+            }@key_random:${randomUUID({
+              disableEntropyCache: true,
+            })}`,
             back_urls: {
-              success: process.env.ADDRESS_API + "/payments/success",
-              failure: process.env.ADDRESS_API + "/payments/failure",
+              success:
+                process.env.URL_CLIENT +
+                "/src/pages/payment/index.html?type=success",
+              failure:
+                process.env.URL_CLIENT +
+                "/src/pages/payment/index.html?type=failure",
             },
           },
         });

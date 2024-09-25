@@ -21,6 +21,7 @@
       "@events/*": ["./src/events/*"],
       "@configs/*": ["./src/configs/*"],
       "@jobs/*": ["./src/jobs/*"],
+      "@signatures/*": ["./src/signatures/*"]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true,

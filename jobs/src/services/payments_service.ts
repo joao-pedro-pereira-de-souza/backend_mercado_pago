@@ -58,14 +58,16 @@ async function payment(
 
     const { expiration } = responseOrderPending.data!;
     const value_product = product.type === typesProducts.bee ? product.option.value : product.value;
+
     const paramsCreateMercadoPago: ParamsCreatePreferences = {
       title: product.title,
       image: product.image,
       description: product.description,
-      id: product.id,
+      id: product.option.id,
       amount: params.amount,
       value: value_product,
       client: {
+        id_user: client.id_user,
         name: client.name,
         cpf: client.cpf,
         email: client.email,
@@ -73,6 +75,7 @@ async function payment(
       expiration_from: expiration.start,
       expiration_to: expiration.end,
     };
+
     const resposePreferenceMercadoPago = await mercadopagoService.preference.create(paramsCreateMercadoPago);
 
     return {

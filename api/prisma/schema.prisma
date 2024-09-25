@@ -27,8 +27,10 @@ model User {
   id_permission String
   permission    Permission @relation(fields: [id_permission], references: [id])
 
-  deleted_at DateTime?
-  Client     Client?
+  deleted_at  DateTime?
+  Client      Client?
+  Order       Order[]
+  LogsPayment LogsPayment[]
 
   @@map("users")
 }
@@ -45,6 +47,7 @@ model Product {
 
   id_item_mercado_pago String?
   deleted_at           DateTime?
+  Order                Order[]
 
   @@map("products")
 }
@@ -71,6 +74,7 @@ model ProductBee {
 
   id_product String
   product    Product @relation(fields: [id_product], references: [id])
+  Order      Order[]
 
   @@map("products_bee")
 }
@@ -82,4 +86,47 @@ model Client {
   user    User   @relation(fields: [id_user], references: [id])
 
   @@map("clients")
+}
+
+model Order {
+  id              String        @id @unique @default(uuid())
+  status          StatusPayment
+  amount          Int
+  payment_method  String
+  id_product      String
+  id_product_been String?
+  id_user         String
+  user            User          @relation(fields: [id_user], references: [id])
+  product         Product       @relation(fields: [id_product], references: [id])
+  optionsBee      ProductBee?   @relation(fields: [id_product_been], references: [id])
+
+  OrderDetails OrderDetails?
+
+  @@map("orders")
+}
+
+model OrderDetails {
+  id                    String @id @unique @default(uuid())
+  id_order              String @unique
+  json_response_gateway Json
+  order                 Order  @relation(fields: [id_order], references: [id])
+
+  @@map("orders_details")
+}
+
+model LogsPayment {
+  id         String        @id @unique @default(uuid())
+  status     StatusPayment
+  message    String?
+  created_at DateTime      @default(now())
+  id_user    String?
+  user       User?         @relation(fields: [id_user], references: [id])
+
+  @@map("logs_payment")
+}
+
+enum StatusPayment {
+  approved
+  rejected
+  pending
 }

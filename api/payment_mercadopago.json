@@ -1,0 +1,229 @@
+{
+    "accounts_info": null,
+    "acquirer_reconciliation": [],
+    "additional_info": {
+        "authentication_code": null,
+        "available_balance": null,
+        "ip_address": "191.204.229.221",
+        "items": [
+            {
+                "category_id": null,
+                "description": null,
+                "id": "cb2afa10-8d5b-4ff3-a42f-0d44aadb014b",
+                "picture_url": null,
+                "quantity": "1",
+                "title": "Produto sem descrição",
+                "unit_price": "30"
+            }
+        ],
+        "nsu_processadora": null,
+        "payer": {
+            "first_name": "sendbox"
+        }
+    },
+    "authorization_code": "229549003",
+    "binary_mode": false,
+    "brand_id": null,
+    "build_version": "3.70.0-rc-2",
+    "call_for_authorize_id": null,
+    "captured": true,
+    "card": {
+        "cardholder": {
+            "identification": {
+                "number": "67377496312",
+                "type": "CPF"
+            },
+            "name": "TESTE DE CARTÃO"
+        },
+        "country": null,
+        "date_created": "2024-09-24T18:41:04.000-04:00",
+        "date_last_updated": "2024-09-24T18:41:04.000-04:00",
+        "expiration_month": 11,
+        "expiration_year": 2025,
+        "first_six_digits": "503143",
+        "id": null,
+        "last_four_digits": "6351",
+        "tags": null
+    },
+    "charges_details": [
+        {
+            "accounts": {
+                "from": "collector",
+                "to": "mp"
+            },
+            "amounts": {
+                "original": 1.49,
+                "refunded": 0
+            },
+            "client_id": 0,
+            "date_created": "2024-09-24T18:41:04.000-04:00",
+            "id": "1327115451-001",
+            "last_updated": "2024-09-24T18:41:04.000-04:00",
+            "metadata": {
+                "source": "rule-engine"
+            },
+            "name": "mercadopago_fee",
+            "refund_charges": [],
+            "reserve_id": null,
+            "type": "fee"
+        }
+    ],
+    "collector_id": 662535518,
+    "corporation_id": null,
+    "counter_currency": null,
+    "coupon_amount": 0,
+    "currency_id": "BRL",
+    "date_approved": "2024-09-24T18:41:04.509-04:00",
+    "date_created": "2024-09-24T18:41:04.244-04:00",
+    "date_last_updated": "2024-09-24T18:41:04.509-04:00",
+    "date_of_expiration": null,
+    "deduction_schema": null,
+    "description": "Produto sem descrição",
+    "differential_pricing_id": null,
+    "external_reference": "id_user:6acb3f98-6cd7-419c-a2b1-042e0af07627@key_random:7f4f5386-70c6-48ef-b43f-18d159067877",
+    "fee_details": [
+        {
+            "amount": 1.49,
+            "fee_payer": "collector",
+            "type": "mercadopago_fee"
+        }
+    ],
+    "financing_group": null,
+    "id": 1327115451,
+    "installments": 1,
+    "integrator_id": "dev_24c65fb163bf11ea96500242ac130004",
+    "issuer_id": "24",
+    "live_mode": false,
+    "marketplace_owner": null,
+    "merchant_account_id": null,
+    "merchant_number": null,
+    "metadata": {},
+    "money_release_date": "2024-09-24T18:41:04.509-04:00",
+    "money_release_schema": null,
+    "money_release_status": "released",
+    "notification_url": null,
+    "operation_type": "regular_payment",
+    "order": {
+        "id": "23176487928",
+        "type": "mercadopago"
+    },
+    "payer": {
+        "identification": {
+            "number": "32659430",
+            "type": "DNI"
+        },
+        "entity_type": null,
+        "phone": {
+            "number": null,
+            "extension": null,
+            "area_code": null
+        },
+        "last_name": null,
+        "id": "1984859960",
+        "type": null,
+        "first_name": null,
+        "email": "test_user_80507629@testuser.com"
+    },
+    "payment_method": {
+        "data": {
+            "routing_data": {
+                "merchant_account_id": "103"
+            }
+        },
+        "id": "master",
+        "issuer_id": "24",
+        "type": "credit_card"
+    },
+    "payment_method_id": "master",
+    "payment_type_id": "credit_card",
+    "platform_id": null,
+    "point_of_interaction": {
+        "business_info": {
+            "branch": "Merchant Services",
+            "sub_unit": "checkout_pro",
+            "unit": "online_payments"
+        },
+        "transaction_data": {
+            "e2e_id": null
+        },
+        "type": "CHECKOUT"
+    },
+    "pos_id": null,
+    "processing_mode": "aggregator",
+    "refunds": [],
+    "release_info": null,
+    "shipping_amount": 0,
+    "sponsor_id": null,
+    "statement_descriptor": null,
+    "status": "approved",
+    "status_detail": "accredited",
+    "store_id": null,
+    "tags": null,
+    "taxes_amount": 0,
+    "transaction_amount": 30,
+    "transaction_amount_refunded": 0,
+    "transaction_details": {
+        "acquirer_reference": null,
+        "external_resource_url": null,
+        "financial_institution": null,
+        "installment_amount": 30,
+        "net_received_amount": 28.51,
+        "overpaid_amount": 0,
+        "payable_deferral_period": null,
+        "payment_method_reference_id": null,
+        "total_paid_amount": 30
+    },
+    "api_response": {
+        "status": 200,
+        "headers": {
+            "date": [
+                "Tue, 24 Sep 2024 22:41:05 GMT"
+            ],
+            "content-type": [
+                "application/json;charset=UTF-8"
+            ],
+            "transfer-encoding": [
+                "chunked"
+            ],
+            "connection": [
+                "keep-alive"
+            ],
+            "vary": [
+                "Accept-Encoding, Accept,Accept-Encoding"
+            ],
+            "cache-control": [
+                "max-age=0"
+            ],
+            "x-content-type-options": [
+                "nosniff"
+            ],
+            "x-request-id": [
+                "9bc9e826-d12f-4ecb-a39b-5d24d50364f6"
+            ],
+            "x-xss-protection": [
+                "1; mode=block"
+            ],
+            "strict-transport-security": [
+                "max-age=16070400; includeSubDomains; preload"
+            ],
+            "access-control-allow-origin": [
+                "*"
+            ],
+            "access-control-allow-headers": [
+                "Content-Type"
+            ],
+            "access-control-allow-methods": [
+                "PUT, GET, POST, DELETE, OPTIONS"
+            ],
+            "access-control-max-age": [
+                "86400"
+            ],
+            "timing-allow-origin": [
+                "*"
+            ],
+            "content-encoding": [
+                "gzip"
+            ]
+        }
+    }
+}
