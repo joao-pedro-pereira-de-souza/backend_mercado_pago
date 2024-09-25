@@ -56,6 +56,12 @@ class UserRepository {
             },
         });
     }
+
+    async getById(id: string) {
+        return prisma.user.findFirst({
+            where: {id}
+        });
+    }
 }
 
 export default new UserRepository();

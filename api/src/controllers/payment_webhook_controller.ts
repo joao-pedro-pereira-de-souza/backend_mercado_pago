@@ -1,24 +1,25 @@
 import { Request, Response, NextFunction } from 'express';
 import { writeFile } from 'fs/promises';
 
-import {SignatureMercadoPago} from '@signatures/mercadopago_signature';
+import { SignatureMercadoPago } from '@signatures/mercadopago_signature';
+import { BodyWebhookPayment } from '@interfaces/mercadopago/webhook.payment';
 
-async function success(req: Request, res: Response, next: NextFunction) {
+import MercadoPago from '@services/gateway/mercadopago';
+
+import OrderService from '@services/order';
+
+
+
+async function success(
+    req: Request<any, any, BodyWebhookPayment, any>,
+    res: Response,
+    next: NextFunction
+) {
     try {
-        const data = {
-            body: req.body,
-            query: req.query,
-            headers: req.headers,
-            header: req.header,
-            url: req.url,
-        };
-
         const xSignature = req.headers['x-signature'] as string;
         const xRequestId = req.headers['x-request-id'] as string;
 
         const dataId = req.query['data.id'] as string;
-        console.log({ signature: xSignature, xRequestId, dataId });
-
         if (!xSignature || !xRequestId || !dataId) {
             return res.status(401).json({ message: 'Signature not found.' });
         }
@@ -32,14 +33,20 @@ async function success(req: Request, res: Response, next: NextFunction) {
         const isSignatureValid = SignatureMercadoPago.validation({
             data_id: dataId,
             x_request_id: xRequestId,
-            x_signature:xSignature
+            x_signature: xSignature,
         });
 
         if (!isSignatureValid) {
             return res.status(401).json({ message: 'Signature invalid.' });
         }
 
-        await writeFile('payment_success.json', JSON.stringify(data, null, 2));
+        const { data } = req.body;
+
+        const paymentMercadoPago: any = await MercadoPago.payment.findById(data.id);
+        if (paymentMercadoPago) {
+            await OrderService.save(paymentMercadoPago);
+        }
+
 
         return res.status(200).json();
     } catch (error) {

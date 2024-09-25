@@ -55,8 +55,6 @@ class ProductRepository {
 
     async findAllGroupedByType() {
 
-
-
         const responseQuery = await prisma.$queryRaw`
          SELECT p.*,
                 ARRAY(
@@ -128,6 +126,30 @@ class ProductRepository {
         });
 
         return formatObject;
+    }
+
+    async findProductOrProductOption(id: string) {
+        const product = await prisma.product.findFirst({
+            where: {
+                id,
+            },
+        });
+
+        if (product) {
+            return product;
+        }
+
+        const product_option = await prisma.productBee.findFirst({
+            where: {
+                id
+            },
+            select: {
+                id: true,
+                id_product: true,
+                product: { select: { type: true } }
+            }
+        });
+        return product_option;
     }
 }
 
